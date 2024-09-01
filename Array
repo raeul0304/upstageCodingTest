@@ -1,0 +1,17 @@
+#문제 : N보다 작은 수들의 입력에서 X보다 작은 수 출력
+# 첫 번째 줄에서 N과 X를 입력받음
+N, X = map(int, input().split())
+
+# 두 번째 줄에서 수열 A를 입력받음
+A = list(map(int, input().split()))
+
+# X보다 작은 수를 저장할 리스트를 초기화
+result = []
+
+# 수열 A를 순회하면서 X보다 작은 수를 찾음
+for number in A:
+    if number < X:
+        result.append(number)
+
+# 결과를 출력함
+print(" ".join(map(str, result)))
