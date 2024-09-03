@@ -1,0 +1,38 @@
+#직선을 입력받아 교점을 *(별)로 출력하는 코드 [배열]
+def solution(line):
+    meet = list()  # 교점을 저장하는 리스트 생성
+    x_max = y_max = -float('inf')  # infinite 값으로 초기화
+    x_min = y_min = float('inf')
+    
+    for i in range(len(line)):
+        a, b, e = line[i]
+        for j in range(i + 1, len(line)):
+            c, d, f = line[j]
+            # 평행하거나 두 직선이 일치하는 경우
+            if (a * d) == (b * c):
+                continue
+            # 두 직선의 교점이 유일하게 존재하는 경우의 x, y값
+            x = ((b * f) - (e * d)) / ((a * d) - (b * c))
+            y = ((e * c) - (a * f)) / ((a * d) - (b * c))
+            
+            # 교점 중 x, y가 정수인 값만 저장
+            if x.is_integer() and y.is_integer():
+                x = int(x)
+                y = int(y)
+                meet.append([x, y])
+                # x, y 최댓값 저장
+                x_max, y_max = max(x_max, x), max(y_max, y)
+                x_min, y_min = min(x_min, x), min(y_min, y)
+    
+    # 2차원 평면에서 교점 좌표들을 포함하는 사각형을 그리기
+    width = abs(x_max - x_min) + 1  # +1은 차지하는 칸을 고려하기 위함
+    height = abs(y_max - y_min) + 1
+    answer = [['.'] * width for _ in range(height)]  # .으로 초기화
+    meet = sorted(meet, key=lambda i: -i[1])  # y값을 음수로 변환하여 내림차순 정렬
+    
+    for x, y in meet:
+        ny = y_max - y #y 좌표를 반전시키기 위해 최대 y 값에서 현재 y 값을 뺌
+        nx = x - x_min #현재 x 값에서 최소 x 값을 빼서 사각형의 왼쪽에서부터 좌표를 채우기 위한 x 좌표를 계산
+        answer[ny][nx] = '*'
+            
+    return list(map(''.join, answer))
