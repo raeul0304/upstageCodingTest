@@ -1,7 +1,6 @@
 # link: https://www.acmicpc.net/problem/1001
 
-A = int(input("Enter A (should be an integer > 0): "))
-B = int(input("Enter B (should be an integer < 10): "))
+import sys
 
 def subtraction(A: int, B: int) -> int:
     """
@@ -12,6 +11,13 @@ def subtraction(A: int, B: int) -> int:
         raise Exception("A should be an integer > 0")
     if B >= 10:
         raise Exception("B should be an integer < 10")
-    print(A - B)
+    return A - B
 
-subtraction(A, B)
+def main():
+    # A = int(input("Enter A (should be an integer > 0): "))
+    # B = int(input("Enter B (should be an integer < 10): "))
+    A, B = map(int, sys.stdin.readline().strip().split())
+    print(subtraction(A, B))
+
+if __name__ == "__main__":
+    main()
