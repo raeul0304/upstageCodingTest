@@ -1,0 +1,10 @@
+def solution(n, left, right):
+    answer = []
+
+    for i in range(left, right + 1):
+        answer.append(max(i // n, i % n) + 1)
+
+    return answer
+
+# 문제풀이 : key point: 해당 위치 값 = max(해당 위치 // n, 해당 위치 % n) + 1
+# 📌 Tip: max(i // n, i % n)
