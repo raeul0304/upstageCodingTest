@@ -11,20 +11,14 @@ T=int(sys.stdin.readline())
 for _ in range(T):
     N,K=map(int,sys.stdin.readline().split())#건물수, 건설순서규칙
     time=[0]+list(map(int,sys.stdin.readline().split()))#건물들의 건설시간
-    print('time = ', time)
     seq=[[] for _ in range(N+1)]#건설순서규칙
-    print('seq = ', seq)
     inDegree=[0 for _ in range(N+1)]#진입차수
-    print('inDegree = ', inDegree)
     DP=[0 for _ in range(N+1)]#해당 건물까지 걸리는 시간
-    print('DP = ', DP)
  
     for _ in range(K):#건설순서규칙 저장
         a,b=map(int,sys.stdin.readline().split())
         seq[a].append(b)
-        print(seq)
         inDegree[b]+=1
-        print(inDegree)
  
     q = deque()
     for i in range(1,N+1):#진입차수 0인거 찾아서 큐에 넣기
